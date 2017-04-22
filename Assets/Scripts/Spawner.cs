@@ -13,17 +13,18 @@ public class Spawner : MonoBehaviour {
     void Start () {
 		double x = Distributions.Poisson(0.15);
 		Debug.Log (x);
-		coroutine = Spawn (10.0f);
+		coroutine = Spawn (2.0f);
 		StartCoroutine (coroutine);
+		queue = new Queue<GameObject> ();
     }
-	
+
 	IEnumerator Spawn(float waitTime)
 	{
 		while (true)
 		{
 			yield return new WaitForSeconds(waitTime);
 
-			GameObject people = Instantiate (character, transform.position, transform.rotation);
+			GameObject people = Instantiate (character, this.transform.position, this.transform.rotation);
 			cb = people.GetComponent (typeof(CharacterBehaviour)) as CharacterBehaviour;
 			cb.serviceTime = Distributions.Exponential (avgServiceTime);
 			queue.Enqueue (people);
