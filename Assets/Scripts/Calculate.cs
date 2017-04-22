@@ -12,6 +12,19 @@ public class Calculate : MonoBehaviour{
 	//tasa de servicio promedio en cada canal
 	public double mu;
 
+	public Calculate(int m, double lambda, double mu){
+		this.m = m;
+		this.lambda = lambda;
+		this.mu = mu;
+
+		Debug.Log(zeroClientsInSystem());
+		Debug.Log(averageNumberOfClients());
+		Debug.Log(averageWaitingTime());
+		Debug.Log(clientsOnLine());
+		Debug.Log(averageWaitingTimeInQueue());
+		Debug.Log(utilizationRate());
+	}
+
 	//La probabilidad que haya cero clientes en el sistema
 	public double zeroClientsInSystem(){	
 		if(m*mu<lambda){
