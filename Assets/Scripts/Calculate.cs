@@ -6,11 +6,11 @@ using System;
 public class Calculate : MonoBehaviour{
 
 	//número de canales abiertos
-	public int m;
+	private int m;
 	//tasa de llegadas promedio
-	public double lambda;
+	private double lambda;
 	//tasa de servicio promedio en cada canal
-	public double mu;
+	private double mu;
 
 	public Calculate(int m, double lambda, double mu){
 		this.m = m;
