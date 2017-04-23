@@ -19,7 +19,7 @@ public class Node : MonoBehaviour {
 
 	void OnDrawGizmos(){
 		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(transform.position, 0.2f);
+		Gizmos.DrawSphere(transform.position, 0.2f);
 		Gizmos.color = Color.blue;
 		for(int i = 0; i < neighbors.Length; i++){
 			Gizmos.DrawLine (transform.position, neighbors [i].transform.position);
