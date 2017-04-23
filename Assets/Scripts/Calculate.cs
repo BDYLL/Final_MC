@@ -32,7 +32,7 @@ public class Calculate : MonoBehaviour{
 			return 0;
 		}
 		double suma = 0;
-		for(int n=0; n<m; n++){
+		for(int n=0; n<=m-1; n++){
 			suma+= (1/factorial(n)) * Math.Pow((lambda/mu),n);
 		}
 		suma += (1/factorial(m)) * Math.Pow((lambda/mu),m) * (m*mu/(m*mu - lambda));
