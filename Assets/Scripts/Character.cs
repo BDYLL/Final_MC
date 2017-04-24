@@ -3,35 +3,43 @@ using System.Collections;
 
 public class Character : MonoBehaviour {
 
-	public GameObject path;
 	public float speed;
 	public float threshold;
+	public Node currentNode;
+	private int nextNodeIndex;
+	private Node next;
 	private Node[] trajectory;
-	private Node current;
-	private int currentI;
+	private GameObject path;
 
 	// Use this for initialization
 	void Start () {
+		path = GameObject.Find("Path");
 		trajectory = path.GetComponentsInChildren<Node>();
-		current = trajectory[0];
-		currentI = 0;
+		next = trajectory[0];
+		nextNodeIndex = 0;
 		StartCoroutine (CheckIfChange ());
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.LookAt(current.transform);
-		transform.rotation = new Quaternion(0,0,transform.rotation.z,0);
-		transform.position = Vector2.MoveTowards(transform.position, current.transform.position, Time.deltaTime * speed);
+		path = GameObject.Find("Path");
+		if(!next.bussy || next.occupiedBy == this.gameObject.GetInstanceID()){
+			transform.LookAt(next.transform);
+			transform.rotation = new Quaternion(0,0,transform.rotation.z,0);
+			transform.position = Vector2.MoveTowards(transform.position, next.transform.position, Time.deltaTime * speed);
+		}else{
+
+		}
 	}
 
 	IEnumerator CheckIfChange(){
 		while (true) {
-			float distance = Vector3.Distance (transform.position, current.transform.position);
+			float distance = Vector3.Distance (transform.position, next.transform.position);
 			if (distance < threshold) {
-				currentI++;
-				currentI %= trajectory.Length;
-				current = trajectory [currentI];
+				nextNodeIndex++;
+				nextNodeIndex %= trajectory.Length;
+				next = trajectory[nextNodeIndex];
+				currentNode = next;
 			}
 			yield return new WaitForSeconds (0.02f);
 		}

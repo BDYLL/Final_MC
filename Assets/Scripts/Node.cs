@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class Node : MonoBehaviour {
 
+	public bool rotateRight;
+	public bool rotateLeft;
+	public bool bussy;
+	public bool destroyOnLeaving;
+	public int occupiedBy;
 	public Node[] neighbors;
 	public List<Node> history;
 
@@ -16,6 +21,25 @@ public class Node : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	void OnTriggerEnter(Collider other) {
+        bussy = true;
+        occupiedBy = other.gameObject.GetInstanceID();       
+        /*
+        if(rotateLeft){
+	    	Quaternion rotation = Quaternion.Euler(0, 0, 90); // this add a 90 degrees Y rotation
+	    	other.gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10.0f);
+        }
+        */
+    }
+
+    void OnTriggerExit(Collider other) {
+        bussy = false;
+        occupiedBy = 0;
+        if(destroyOnLeaving){
+        	Destroy(other.gameObject);
+        }
+    }
 
 	void OnDrawGizmos(){
 		Gizmos.color = Color.green;
