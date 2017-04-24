@@ -7,7 +7,7 @@ public class Node : MonoBehaviour {
 	public bool rotateRight;
 	public bool rotateLeft;
 	public bool bussy;
-	public bool destroyOnLeaving;
+	public bool cashier;
 	public int occupiedBy;
 	public Node[] neighbors;
 	public List<Node> history;
@@ -36,7 +36,7 @@ public class Node : MonoBehaviour {
     void OnTriggerExit(Collider other) {
         bussy = false;
         occupiedBy = 0;
-        if(destroyOnLeaving){
+        if(cashier){
         	Destroy(other.gameObject);
         }
     }
