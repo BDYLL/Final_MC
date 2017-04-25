@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour {
 	public Queue<GameObject> queue;
 	private int counter, times;
 	IEnumerator coroutine;
-	private CharacterBehaviour cb;
+	private Character cb;
 	private float rep;
     // Use this for initialization
     void Start () {
@@ -26,8 +26,8 @@ public class Spawner : MonoBehaviour {
 	public void createPerson(){
 		if(counter++ < times){
 			GameObject people = Instantiate (characters[(int)(Random.Range(0.0f, 4.0f))], this.transform.position, this.transform.rotation);
-			cb = people.GetComponent (typeof(CharacterBehaviour)) as CharacterBehaviour;
-			cb.serviceTime = Distributions.Exponential (avgServiceTime);
+			cb = people.GetComponent (typeof(Character)) as Character;
+			cb.serviceTime = (float)Distributions.Exponential (avgServiceTime);
 			queue.Enqueue (people);	
 		}
 		CancelInvoke ();

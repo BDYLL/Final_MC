@@ -5,6 +5,7 @@ public class Character : MonoBehaviour {
 
 	public float speed;
 	public float threshold;
+	public float serviceTime;	
 	public Node currentNode;
 	private int nextNodeIndex;
 	private Node next;
@@ -34,15 +35,24 @@ public class Character : MonoBehaviour {
 		}
 	}
 
+	IEnumerator waitToBeDestroyed(){
+		//I'm Mr. Meeseeks Loot at me!
+		Debug.Log(Time.time+" "+serviceTime);
+		yield return new WaitForSeconds(serviceTime);
+		Debug.Log(Time.time+" "+serviceTime);
+		next.occupiedBy = 0;
+		next.bussy=false;
+		currentNode.bussy = false;
+		Destroy(this.gameObject);
+	}
+
 	IEnumerator CheckIfChange(){
 		while (true) {
 			float distance = Vector3.Distance (transform.position, next.transform.position);
 			if (distance < threshold) {
 				nextNodeIndex++;
 				if(next.cashier){
-					next.bussy=false;
-					next.occupiedBy = 0;
-					Destroy(this.gameObject);
+					StartCoroutine(waitToBeDestroyed());
 				}
 				else if(nextNodeIndex >= trajectory.Length){
 					for(int i=0; i<cashiers.Length; i++){

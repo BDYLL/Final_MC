@@ -36,9 +36,13 @@ public class Node : MonoBehaviour {
     void OnTriggerExit(Collider other) {
         bussy = false;
         occupiedBy = 0;
-        if(cashier){
+        if(cashier && occupiedBy == other.gameObject.GetInstanceID()){
         	Destroy(other.gameObject);
         }
+    }
+
+    void OnTriggerStay(Collider other){
+    	bussy = true;
     }
 
 	void OnDrawGizmos(){
