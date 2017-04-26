@@ -25,12 +25,12 @@ public class Node : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
         bussy = true;
         occupiedBy = other.gameObject.GetInstanceID();       
-        /*
         if(rotateLeft){
-	    	Quaternion rotation = Quaternion.Euler(0, 0, 90); // this add a 90 degrees Y rotation
-	    	other.gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10.0f);
+	    	other.transform.Rotate(0, 0, 90);
         }
-        */
+        if(rotateRight){
+	    	other.transform.Rotate(0, 0, -90);
+        }
     }
 
     void OnTriggerExit(Collider other) {

@@ -27,8 +27,8 @@ public class Character : MonoBehaviour {
 	void Update () {
 		path = GameObject.Find("Path");
 		if(!next.bussy || next.occupiedBy == this.gameObject.GetInstanceID()){
-			transform.LookAt(next.transform);
-			transform.rotation = new Quaternion(0,0,transform.rotation.z,0);
+			//transform.LookAt(next.transform);
+			//transform.rotation = new Quaternion(0,0,transform.rotation.z,0);
 			transform.position = Vector2.MoveTowards(transform.position, next.transform.position, Time.deltaTime * speed);
 		}else{
 
