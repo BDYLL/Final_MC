@@ -145,6 +145,7 @@ public class UIBehaviour : MonoBehaviour {
             {
                 showResults();
                 spawner.GetComponent<Spawner>().startSimulator(m, (float) lamda, (float) mu);
+                spawner.GetComponent<CashierSpawn>().spawnCashiers(m);
                 played = true;
             }
             else

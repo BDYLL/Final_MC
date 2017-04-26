@@ -22,7 +22,7 @@ public class CashierSpawn : MonoBehaviour {
 		int index;
 		while (i < cashiers) {
 			index = (int)(Random.Range (0.0f, 1.5f));
-			//Debug.Log ("Index : "+index);
+			Debug.Log ("Index : "+index);
 			GameObject people = Instantiate (characters[0], spawnPositions[i], this.transform.rotation);
 			i++;
 		}
