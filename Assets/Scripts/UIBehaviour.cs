@@ -24,26 +24,21 @@ public class UIBehaviour : MonoBehaviour {
     private Text TiempoColaValueEAText;
     private Text ClientesColaValueEAText;
     //Valores de Entrada
-    private int m;
-    private double mu;
-    private double lamda;
+    public int m;
+    public double mu;
+    public double lamda;
+    public GameObject spawner;
 
     void Start()
     {
         //Valores de Resultado Esperado Text
-        CeroClientesValueREText = GameObject.Find("CeroClientesValueRE").GetComponent<Text>();
-        ClientesSistemaValueREText = GameObject.Find("ClientesSistemaValueRE").GetComponent<Text>();
-        TiempoSistemaValueREText = GameObject.Find("TiempoSistemaValueRE").GetComponent<Text>();
-        TasaUtilValueREText = GameObject.Find("TasaUtilValueRE").GetComponent<Text>();
-        TiempoColaValueREText = GameObject.Find("TiempoColaValueRE").GetComponent<Text>();
-        ClientesColaValueREText = GameObject.Find("ClientesColaValueRE").GetComponent<Text>();
-        //valores de Estado Actual Text
-        CeroClientesValueEAText = GameObject.Find("CeroClientesValueEA").GetComponent<Text>();
-        ClientesSistemaValueEAText = GameObject.Find("ClientesSistemaValueEA").GetComponent<Text>();
-        TiempoSistemaValueEAText = GameObject.Find("TiempoSistemaValueEA").GetComponent<Text>();
-        TasaUtilValueEAText = GameObject.Find("TasaUtilValueEA").GetComponent<Text>();
-        TiempoColaValueEAText = GameObject.Find("TiempoColaValueEA").GetComponent<Text>();
-        ClientesColaValueEAText = GameObject.Find("ClientesColaValueEA").GetComponent<Text>();
+        CeroClientesValueREText = GameObject.Find("CeroClientesValue").GetComponent<Text>();
+        ClientesSistemaValueREText = GameObject.Find("ClientesSistemaValue").GetComponent<Text>();
+        TiempoSistemaValueREText = GameObject.Find("TiempoSistemaValue").GetComponent<Text>();
+        TasaUtilValueREText = GameObject.Find("TasaUtilValue").GetComponent<Text>();
+        TiempoColaValueREText = GameObject.Find("TiempoColaValue").GetComponent<Text>();
+        ClientesColaValueREText = GameObject.Find("ClientesColaValue").GetComponent<Text>();
+       
         m = -1;
         mu = lamda = -1.0f;
         played = paused =  false;
@@ -140,26 +135,29 @@ public class UIBehaviour : MonoBehaviour {
         ClientesColaValueREText.text = results.clientsOnLine() + "";
     }
 
-    private bool played;
+    public bool played;
     public void playSimulator()
     {
         if (!played)
         {
+            Debug.Log(mu > 0);
             if (m > 0 && lamda > 0 && mu > 0)
             {
                 showResults();
+                spawner.GetComponent<Spawner>().startSimulator(m, (float) lamda, (float) mu);
+                played = true;
             }
             else
             {
                 EditorUtility.DisplayDialog("Error en la entrada de datos", "Para que este simulador necesita llenar todos los campos", "Ok");
 
             }
-            played = true;
+          
         }
         
     }
 
-    private bool paused;
+    public bool paused;
     public void pauseSimulator()
     {
         if (played)
@@ -172,6 +170,6 @@ public class UIBehaviour : MonoBehaviour {
 
     public void restart()
     {
-        SceneManager.LoadScene("test");
+        SceneManager.LoadScene("Test1");
     }
 }

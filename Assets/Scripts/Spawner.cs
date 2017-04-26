@@ -12,16 +12,29 @@ public class Spawner : MonoBehaviour {
 	IEnumerator coroutine;
 	private Character cb;
 	private float rep;
+	public GameObject[] cashiers;
     // Use this for initialization
-    void Start () {
+    /*void Start () {
 		double x = Distributions.Poisson(arrivalTime);
 		Debug.Log (x);
 		coroutine = Spawn (interval);
 		StartCoroutine (coroutine);
 		queue = new Queue<GameObject> ();
 		counter = 0;
+    }*/
+    public void startSimulator( int m, float arrivalTime, float avgServiceTime){
+    	this.arrivalTime = arrivalTime;
+    	this.avgServiceTime = avgServiceTime;
+    	double x = Distributions.Poisson(arrivalTime);
+		Debug.Log (x);
+		coroutine = Spawn (interval);
+		StartCoroutine (coroutine);
+		queue = new Queue<GameObject> ();
+		counter = 0;
+		for(int i = cashiers.Length - 1; i >= m; i--){
+			cashiers[i].GetComponent<Node>().bussy = true;
+		}
     }
-
 
 	public void createPerson(){
 		if(counter++ < times){
