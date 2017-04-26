@@ -37,9 +37,7 @@ public class Character : MonoBehaviour {
 
 	IEnumerator waitToBeDestroyed(){
 		//I'm Mr. Meeseeks Loot at me!
-		Debug.Log(Time.time+" "+serviceTime);
 		yield return new WaitForSeconds(serviceTime);
-		Debug.Log(Time.time+" "+serviceTime);
 		next.occupiedBy = 0;
 		next.bussy=false;
 		currentNode.bussy = false;

@@ -35,8 +35,8 @@ public class Calculate{
 		for(int n=0; n<=m-1; n++){
 			suma+= (1/factorial(n)) * Math.Pow((lambda/mu),n);
 		}
-		suma += (1/factorial(m)) * Math.Pow((lambda/mu),m) * (m*mu/(m*mu - lambda));
-		return suma;
+		suma += (1/factorial(m)) * Math.Pow((lambda/mu),m) * ((m*mu)/(m*mu - lambda));
+		return 1/suma;
 	}
 
 	//Número promedio de clientes o unidades en el sistema
